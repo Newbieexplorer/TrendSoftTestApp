@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        $(function() {
+            $( "#created" ).datepicker();
+        });
+    </script>
+</head>
+<body>
+
+<div class="container" style="width:80%;margin:0 auto;">
+    <form action="/news/update" method="POST" role="form" class="form-horizontal">
+        <div class="input-group" style="padding: 10px;">
+            <span class="input-group-addon" id="name">Name</span>
+            <input type="text" class="form-control" placeholder="name" name="name" value="{{news.name}}" aria-describedby="basic-addon1" required>
+        </div>
+
+        <div class="form-group" style="padding: 10px;">
+            <label for="body">Body</label>
+            <textarea class="form-control" rows="5" id="body" placeholder="body" name="body" value="">{{news.body}}</textarea>
+        </div>
+        <div class="form-group">
+            {% for category in categories %}
+            <input type="checkbox" name="option{{category.id}}" value="{{category.id}}" >{{category.name}}<Br>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <p style="padding:10px;">Date: <input type="text"  name="created" id="created" value="" required></p>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Update</button>
+            </div>
+        </div>
+
+        <input type="hidden" name="idNews" value="{{idNews}}">
+    </form>
+
+</div>
+</body>
+</html>
